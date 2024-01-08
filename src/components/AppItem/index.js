@@ -12,9 +12,9 @@ const AppItem = props => {
           src={imageURL}
           alt={`app-item${appId}`}
         />
-        <div className="app-item-details-container">
-          <h1 className="app-item-title">{appName}</h1>
-        </div>
+        <li className="app-item-details-container">
+          <p className="app-item-title">{appName}</p>
+        </li>
       </li>
     </>
   )

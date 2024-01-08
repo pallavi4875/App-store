@@ -297,26 +297,38 @@ const appsList = [
 class App extends Component {
   state = {
     activeTabId: tabsList[0].tabId,
+    searchText: '',
   }
 
   clickTabItem = tabValue => {
     this.setState({activeTabId: tabValue})
   }
 
+  onSearchChange = event => {
+    this.setState({searchText: event.target.value})
+  }
+
   getFilteredProjects = () => {
-    const {activeTabId} = this.state
+    const {activeTabId, searchText} = this.state
     const filteredProjects = appsList.filter(
-      eachappDetails => eachappDetails.category === activeTabId,
+      eachappDetails =>
+        eachappDetails.category === activeTabId &&
+        eachappDetails.appName.toLowerCase().includes(searchText.toLowerCase()),
     )
     return filteredProjects
   }
 
   render() {
-    const {activeTabId} = this.state
+    const {activeTabId, searchText} = this.state
     const filteredProjects = this.getFilteredProjects()
     return (
       <div className="app-container">
         <h1 className="title">App Store</h1>
+        <input
+          type="search"
+          value={searchText}
+          onChange={this.onSearchChange}
+        />
         <img
           src="https://assets.ccbp.in/frontend/react-js/app-store/app-store-search-img.png"
           alt=" search icon"
